@@ -12,8 +12,12 @@ const url = {
   visitCount: {
     type: Number,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+  },
 };
 
 const urlSchema = new mongoose.Schema(url);
-const userModel = mongoose.model("urls", urlSchema);
-module.exports = userModel;
+const urlModel = mongoose.model("urls", urlSchema);
+module.exports = urlModel;

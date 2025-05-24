@@ -6,4 +6,5 @@ const {
 const router = express.Router();
 router.post("/", handleGenerateShortURL);
 router.get("/:id", handleRedirectToURL);
+
 module.exports = router;

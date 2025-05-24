@@ -7,11 +7,18 @@ const handleGenerateShortURL = async (req, res) => {
       error: "Url was not provided",
     });
   }
-  const data = urlModel.create({
+  if (await urlModel.findOne({ redirectUrl: req.body.url })) {
+    res.send({
+      error: "Url Already Present",
+    });
+  }
+  const data = await urlModel.create({
     shortId: id,
     redirectUrl: req.body.url,
     visitCount: 0,
+    user: req.user.id,
   });
+  console.log("url generated", data);
   res.json({
     id,
     data,
@@ -30,7 +37,7 @@ const handleRedirectToURL = async (req, res) => {
     },
     { new: true }
   );
-  console.log("url to requrest", url, newdata);
+
   if (url) res.redirect(url.redirectUrl);
   else {
     res.send({

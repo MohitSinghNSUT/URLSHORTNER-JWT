@@ -4,6 +4,7 @@ mongoose
   .then((Res) => {
     console.log("database connected ");
   })
-  .catch(() => {
+  .catch((error) => {
     console.log("error in connecting db");
+    console.log(error);
   });
