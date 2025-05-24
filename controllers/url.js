@@ -11,6 +11,7 @@ const handleGenerateShortURL = async (req, res) => {
     res.send({
       error: "Url Already Present",
     });
+    return;
   }
   const data = await urlModel.create({
     shortId: id,

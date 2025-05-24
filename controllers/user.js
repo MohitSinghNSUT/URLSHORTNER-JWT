@@ -25,7 +25,7 @@ const userLogin = async (req, res) => {
     );
   } catch (err) {
     console.error(err);
-    res.status(500).send({ error: "Server Error" });
+    return res.status(500).send({ error: "Server Error" });
   }
 };
 const userSignUp = async (req, res) => {
@@ -34,11 +34,11 @@ const userSignUp = async (req, res) => {
   try {
     if (await userModel.findOne(user)) {
       console.log("user found ", user);
-      res.send({ msg: "User present" });
+      return res.send({ msg: "User present" });
     }
     const userCreated = await userModel.create(user);
     console.log(userCreated);
-    res.send({});
+    return res.send({});
   } catch (error) {
     console.log(error, error.name);
     if (error.name === "ValidationError") {
@@ -53,7 +53,7 @@ const userSignUp = async (req, res) => {
     }
 
     // Other (non-validation) errors
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
